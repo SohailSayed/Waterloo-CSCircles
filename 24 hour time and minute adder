@@ -1,0 +1,56 @@
+st = input()
+dur = input()
+
+#Calculate min amount of hours duration can be rounded off to going up
+hour = 60
+while int(dur) > hour:
+   hour = hour + 60
+
+#convert duration in minutes to hh and mm
+hour_adjust = (hour - 60) 
+a1 = int(hour_adjust / 60)
+b1 = int(dur) - int(hour_adjust)
+
+#split hh:mm into hh and mm
+for n in range(0,len(st)):
+   if st[n] == ":":
+      a = st[0:n]
+      b = st[n+1:len(st)]
+
+#add both hh(a) and mm(b) together
+if int(a) + int(a1) >= 24:
+   a_comb = int(a) + int(a1) - 24
+   if int(b) + int(b1) >= 60:
+      b_comb = int(b) + int(b1) - 60
+      a_comb = a_comb + 1
+      #Stops hh from exceeding 23hh
+      if a_comb >= 24:
+         a_comb = a_comb - 24
+   if int(b) + int(b1) <= 60:
+      b_comb = int(b) + int(b1)
+      if a_comb >= 24:
+         a_comb = a_comb - 24
+if int(a) + int(a1) <= 24:
+   a_comb = (int(a) + int(a1))
+   if int(b) + int(b1) >= 60:
+      b_comb = int(b) + int(b1) - 60
+      a_comb = a_comb + 1
+      if a_comb >= 24:
+         a_comb = a_comb - 24
+   if int(b) + int(b1) <= 60:
+      b_comb = int(b) + int(b1)
+      if a_comb >= 24:
+         a_comb = a_comb - 24
+      
+#print the added time
+if a_comb > 9:
+   if b_comb > 9:
+      print(str(a_comb) + ":" + str(b_comb))
+   if b_comb <= 9:
+      print(str(a_comb) + ":0" + str(b_comb))
+if a_comb <= 9:
+   if b_comb > 9:
+      print("0" + str(a_comb) + ":" + str(b_comb))
+   if b_comb <= 9:
+      print("0" + str(a_comb) + ":0" + str(b_comb))
+   
